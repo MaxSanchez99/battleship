@@ -2,7 +2,10 @@ import Ship from "./ship.js";
 
 export default class Gameboard {
     constructor () {
-        this.board = Array.from({ length: 10 }, () => Array.from({ length: 10 }, () => null));
+        this.board = Array.from({ length: 10 }, () => Array.from({ length: 10 }, () => ({
+            ship: null,
+            hit: false
+        })));
         this.missedShots = [];
         this.ships = [];
     }
@@ -11,7 +14,7 @@ export default class Gameboard {
 
         const ship = new Ship(length);
 
-        coordinates = [start];
+        const coordinates = [start];
 
         if (direction === "right"){
             let col = start[1];
@@ -32,7 +35,7 @@ export default class Gameboard {
         }
 
         coordinates.forEach(([x, y]) => {
-            this.board[x][y] = ship;
+            this.board[x][y].ship = ship;
         });
 
         this.ships.push(ship);
@@ -41,7 +44,7 @@ export default class Gameboard {
 
     verifyShipCoordinates (coordinates) {
         for (const coord of coordinates){
-            if (this.board[coord[0]][coord[1]] != null){
+            if (this.board[coord[0]][coord[1]].ship != null){
                 return false;
             }
         }
@@ -50,13 +53,15 @@ export default class Gameboard {
 
     receiveAttack(coordinate){
         const [x, y] = coordinate
-        if (this.board[x][y] instanceof Ship) {
-            const ship = this.board[x][y];
+        if (this.board[x][y].ship instanceof Ship) {
+            const ship = this.board[x][y].ship;
             ship.hit();
         }
         else {
             this.missedShots.push(coordinate);
         }
+
+        this.board[x][y].hit = true;
     }
 
     allSunk () {

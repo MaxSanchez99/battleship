@@ -1,11 +1,22 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    
-</body>
+  </head>
+  <body>
+    <h1>Battleship</h1>
+    <div class="container">
+      <div class="board" id="grid1"></div>
+      <div class="board" id="grid2"></div>
+    </div>
+    <div id="turn">Current Turn: <span id="current-player">Player</span></div>
+
+    <dialog id="modal-dialog">
+      <h2>Game Over</h2>
+      <h3>Winner: <span id="winner"></span></h3>
+      <button id="close-btn">New Game</button>
+    </dialog>
+  </body>
 </html>

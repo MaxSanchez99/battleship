@@ -41,7 +41,7 @@ test("Ship gets attacked", () => {
     gameboard.placeShip(3, [0, 0], 'right');
     gameboard.receiveAttack([0, 0]);
     
-    const ship = gameboard.board[0][0];
+    const ship = gameboard.board[0][0].ship;
     expect(ship.hits).toBe(1);
 });
 
@@ -51,7 +51,7 @@ test("Missed shot", () => {
     gameboard.placeShip(3, [0, 0], 'right');
     gameboard.receiveAttack([1, 0]);
     
-    const ship = gameboard.board[0][0];
+    const ship = gameboard.board[0][0].ship;
     expect(ship.hits).toBe(0);
     expect(gameboard.missedShots.length).toBe(1)
 });
